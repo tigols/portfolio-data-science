@@ -17,12 +17,13 @@ Construir fluência em Python escrevendo o código eu mesmo e aplicar conceitos 
 | 00 | Ambiente, funções de média e mediana, testes | ✅ |
 | 01 | Listas, dicionários e comprehensions | ✅ |
 | 02 | Funções, validação de tipos e testes parametrizados | ✅ |
+| 03 | Pandas, nulos, taxas e séries | ✅ |
 
 ## Como rodar
 ```
 python -m venv .venv
 .venv\Scripts\activate
-pip install pytest
+pip install -r requirements.txt
 python -m pytest
 ```
 
@@ -43,3 +44,10 @@ python -m pytest
     - Sempre pensar em 'falhar rápido' na função, isso economiza tempo e processamento, logo devemos deixar no inicio das funções as verificações e erros.
     - Usar a `docstring` como um contrato da função, deixando claro sua responsabilidade e entrega.
     - Se a função fizer A **E** B, é um indício de que devemos ter duas funções, uma para A e outra para B.
+- Aula 3
+    - Atributos, funções e manipulação de Pandas DataFrames.
+    - Limpeza de dados faltantes, função simples de taxa.
+    - Testes para casos de borda.
+    - Usar dropna() ao invés de fillna() depende do problema e nesse caso não faz sentido assumir valores para o cálculo de taxa.
+    - A parte exploratória é fundamental para entender os dados antes de sair calculando métricas, entender que uma coluna tem mais de 50% de valores faltantes é fundamental.
+    - Utilizar `pip freeze > arquivo.txt` para gerar a lista de bibliotecas exigidas.
