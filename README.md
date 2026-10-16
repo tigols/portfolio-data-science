@@ -45,6 +45,8 @@ python -m pytest
     - Usar a `docstring` como um contrato da função, deixando claro sua responsabilidade e entrega.
     - Se a função fizer A **E** B, é um indício de que devemos ter duas funções, uma para A e outra para B.
 - Aula 3
+    - Coluna `deck` apresenta mais de 70% de valores nulos
+    - Crianças e mulheres sobreviveram em mais de 50% do que homens, o que pode ser explicado pelo operacional de emergência que prioriza crianças e mulheres para entrar nos botes.
     - Atributos, funções e manipulação de Pandas DataFrames.
     - Limpeza de dados faltantes, função simples de taxa.
     - Testes para casos de borda.
