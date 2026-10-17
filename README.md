@@ -18,6 +18,7 @@ Construir fluência em Python escrevendo o código eu mesmo e aplicar conceitos 
 | 01 | Listas, dicionários e comprehensions | ✅ |
 | 02 | Funções, validação de tipos e testes parametrizados | ✅ |
 | 03 | Pandas, nulos, taxas e séries | ✅ |
+| 04 | Seaborn, Matplotlib e visualizações de dados | ✅ |
 
 ## Como rodar
 ```
@@ -53,3 +54,9 @@ python -m pytest
     - Usar dropna() ao invés de fillna() depende do problema e nesse caso não faz sentido assumir valores para o cálculo de taxa.
     - A parte exploratória é fundamental para entender os dados antes de sair calculando métricas, entender que uma coluna tem mais de 50% de valores faltantes é fundamental.
     - Utilizar `pip freeze > arquivo.txt` para gerar a lista de bibliotecas exigidas.
+- Aula 4
+    - Utilizamos algumas visualizações para mostrar resultados de nossas funções.
+    - Vemos na terceira classe os homens eram mais que o dobro das mulheres.
+    - Entre primeira e segunda classe a relação homem:mulher é próxima de 1.
+    - Os testes em funções que geram imagens focam em ver se o caminho da imagem existe após ser chamada.
+    - Para funções de imagens, é melhor separar em uma função que prepara os dados e outra que gera a imagem.
