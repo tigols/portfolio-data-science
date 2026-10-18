@@ -47,7 +47,7 @@ python -m pytest
     - Se a função fizer A **E** B, é um indício de que devemos ter duas funções, uma para A e outra para B.
 - Aula 3
     - Coluna `deck` apresenta mais de 70% de valores nulos
-    - Crianças e mulheres sobreviveram em mais de 50% do que homens, o que pode ser explicado pelo operacional de emergência que prioriza crianças e mulheres para entrar nos botes.
+    - Crianças e mulheres sobreviveram do que homens, o que pode ser explicado pelo operacional de emergência que prioriza crianças e mulheres para entrar nos botes.
     - Atributos, funções e manipulação de Pandas DataFrames.
     - Limpeza de dados faltantes, função simples de taxa.
     - Testes para casos de borda.
@@ -56,7 +56,10 @@ python -m pytest
     - Utilizar `pip freeze > arquivo.txt` para gerar a lista de bibliotecas exigidas.
 - Aula 4
     - Utilizamos algumas visualizações para mostrar resultados de nossas funções.
-    - Vemos na terceira classe os homens eram mais que o dobro das mulheres.
-    - Entre primeira e segunda classe a relação homem:mulher é próxima de 1.
+    - Vemos na terceira classe os homens eram mais que o dobro das mulheres. ![sexo-por-classe](reports/figs/titanic/02_grupos_a_bordo.png)
+    - Entre primeira e segunda classe a relação homem:mulher é de 1,3 e 1,4 respectivamente.
+    - A sobrevivência entre mulheres é de ~74% enquanto entre os homens é de ~18% ![sobrevivencia-por-sex](reports/figs/titanic/04_sobrevivencia_por_sex.png)
+    - Vemos que, apesar dos idosos de 75 ou mais anos de idade sobreviveram enquanto o grupo entre 51 e 75 anos apresentaram uma taxa de sobrevivência de ~33%.![sobrevivencia-por-idade](reports/figs/titanic/04_sobrevivencia_por_age_bucket.png)    
     - Os testes em funções que geram imagens focam em ver se o caminho da imagem existe após ser chamada.
     - Para funções de imagens, é melhor separar em uma função que prepara os dados e outra que gera a imagem.
+    - Vemos pelos dados que o protocolo de emergência parece ter funcionado, vemos as maiores taxas de sobrevivência entre os mais novos e de sexo feminino.
