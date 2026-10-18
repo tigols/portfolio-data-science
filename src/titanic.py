@@ -23,7 +23,7 @@ def resumo_nulos(df: pd.DataFrame):
 
 def taxa_sobrevivencia_por(df: pd.DataFrame, grupo: str, alvo: str = "survived"):
     """
-    Recebe um dataframe e retorna uma taxa da coluna alvo agrupado por um grupo
+    Recebe um dataframe e retorna um dataframe com media e n para o grupo
     """
 
     if not isinstance(df, pd.DataFrame):
@@ -45,8 +45,8 @@ def taxa_sobrevivencia_por(df: pd.DataFrame, grupo: str, alvo: str = "survived")
     # tiramos os registros nulos, não assumimos nenhum valor para inputar (nesse caso usaria fillna())
     df_clean = df[[alvo, grupo]].dropna().copy()
     # como a coluna alvo é composta por 0 e 1, a taxa é a simples média da coluna, agrupada por grupo.
-    taxas = df_clean.groupby(grupo)[alvo].mean()
-    return taxas # retorna uma série
+    taxas = df_clean.groupby(grupo)[alvo].agg(media="mean", n="count").reset_index()
+    return taxas # retorna um df
 
 
 if __name__ == '__main__':

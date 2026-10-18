@@ -23,6 +23,12 @@ taxa_esperada = pd.Series([1,0.5,0], index = pd.Index(["grande", "medio", "peque
 # podemos nomear a série e os indices, para nomear a série passe name= por fora e para indice passe dentro do pd.Index()
 # podemos contornar o erro de nomes divergentes tirando a checagem de names dentro do pd.testing.assert_series_equal(check_names=False)
 
+taxa_esperada_2 = pd.DataFrame({
+    "modelo": ["grande", "medio", "pequeno"],
+    "media": [1, 0.5, 0],
+    "n": [1,2,1]
+})
+
 
 @pytest.mark.parametrize("entrada",
                          [(df_vazio)])
@@ -84,4 +90,4 @@ def test_taxa_tipo_invalido(dataset, grupo, alvo):
                             (df_taxa, "modelo", "ativo"),
                         ])
 def test_taxa_por_grupo(dataset, grupo, alvo):
-    pd.testing.assert_series_equal(taxa_sobrevivencia_por(dataset, grupo, alvo), taxa_esperada)
+    pd.testing.assert_frame_equal(taxa_sobrevivencia_por(dataset, grupo, alvo), taxa_esperada_2)

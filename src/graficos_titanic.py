@@ -3,6 +3,7 @@ import seaborn as sns
 from pathlib import Path
 from src.titanic import resumo_nulos, taxa_sobrevivencia_por
 import pandas as pd
+import numpy as np
 
 
 # Variable	Definition	Key
@@ -69,7 +70,7 @@ def plot_grupos_a_bordo(df: pd.DataFrame):
 
     if df.empty:
         raise ValueError("O dataset está vazio")
-    for _ in ['class', 'age']:
+    for _ in ['class']:
         if _ not in df.columns:
             raise KeyError(f"{_} não está entre as colunas do dataframe")
 
@@ -117,26 +118,41 @@ def plot_sobrevivencia(df:pd.DataFrame, grupo: str):
             raise KeyError(f"{_} não está entre as colunas do dataframe")
         
 
-    df_sobrevivencia = taxa_sobrevivencia_por(df, grupo).reset_index()
-    df_sobrevivencia.columns = [grupo, "pct"]
-    df_sobrevivencia["pct"] = df_sobrevivencia["pct"] * 100
+    df_sobrevivencia = taxa_sobrevivencia_por(df, grupo)
+    df_sobrevivencia["media"] = df_sobrevivencia["media"] * 100
 
     fig, ax = plt.subplots(figsize = (10,6))
-    sns.barplot(df_sobrevivencia, x = grupo, y = 'pct', ax = ax)
+    sns.barplot(df_sobrevivencia, x = grupo, y = 'media', ax = ax)
+    textos = [f"{m:.1f}%\n(n={n})" for m, n in zip(df_sobrevivencia["media"], df_sobrevivencia["n"])]
     for bar in ax.containers:
-        ax.bar_label(bar, fmt="%.2f%%", label_type='center')
+        ax.bar_label(bar, labels=textos, label_type='center')
 
+
+    ax.set_title(f"Taxa de sobrevivência por {grupo}")
+    ax.set_ylabel("Percentual de Sobreviventes")
+    fig.savefig(f"reports/figs/titanic/04_sobrevivencia_por_{grupo}.png")
     plt.show()
+
 
 if __name__ == '__main__':
     dados = sns.load_dataset("titanic")
+    condicoes = [
+        dados['age'] <= 25,
+        (dados['age'] > 25) & (dados['age'] <= 50),
+        (dados['age'] > 50) & (dados['age'] <= 75),
+        dados['age'] > 75
+    ]
+    faixas = ["0-25", "26-50", "51-75", "75+"]
+    dados['age_bucket'] = np.select(condicoes, faixas, default="Unknown")
+
+
     df_sex_class = dados[['sex', 'class']].value_counts().reset_index().sort_values("sex")
     df_sex_class_age = dados[['sex', 'class', 'age']].sort_values("sex")
     plot_valores_faltantes(dados)
     plot_grupos_a_bordo(df_sex_class)
     plot_idades_por_grupo(df_sex_class_age)
     plot_sobrevivencia(dados, "sex")
-    plot_sobrevivencia(dados, "age")
+    plot_sobrevivencia(dados, "age_bucket")
 
 
     
