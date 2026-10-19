@@ -65,7 +65,7 @@ python -m pytest
     - Para funções de imagens, é melhor separar em uma função que prepara os dados e outra que gera a imagem.
     - Vemos pelos dados que o protocolo de emergência parece ter funcionado, vemos as maiores taxas de sobrevivência entre os mais novos e de sexo feminino.
 - Regressão Simples e Statsmodels
-    - Utilizamos o notebook ![Análise de Regressão no mpg](notebooks/regressao_mpg.ipynb) para uma análise do banco de dados "mpg" de carros e o objetivo era estudar regressão linear utilizando a biblioteca "statsmodels".
+    - Utilizamos o notebook [Análise de Regressão no mpg](notebooks/regressao_mpg.ipynb) para uma análise do banco de dados "mpg" de carros e o objetivo era estudar regressão linear utilizando a biblioteca "statsmodels".
     - Para a tarefa, tentamos predizer a variável "mpg" utilizando "horsepower" e "weight".
     - A dispersão das variáveis de interesse: ![Dispersão MPG](/reports/figs/mpg/dispersao_mpg.png) ![Dispersão Horsepower](/reports/figs/mpg/dispersao_horsepower.png) e ![Dispersão Weights](/reports/figs/mpg/dispersao_weights.png)
     - Podemos avaliar que o modelo mais simples "mpg ~ horsepower + weight" não era o ideal devido aos resíduos ![Resíduos modelo 1](/reports/figs/mpg/residuos_modelo1.png). Eles apresentam heterocedasticidade (No gráfico de resíduos vs. previstos a nuvem de pontos tem formato de U e aumento da variação em forma de funil) além de apresentar assimetria à direita (Q-Q Plot com pontos acima da reta de 45°).
