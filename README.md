@@ -20,6 +20,7 @@ Construir fluência em Python escrevendo o código eu mesmo e aplicar conceitos 
 | 03 | Pandas, nulos, taxas e séries | ✅ |
 | 04 | Seaborn, Matplotlib e visualizações de dados | ✅ |
 | 05 | Statsmodels, regressão linear e estatística | ✅ |
+| 06 | Regressão logistica, scikit-learn, pre modeling e pipes | 🕒 |
 
 ## Como rodar
 ```
