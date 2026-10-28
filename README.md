@@ -77,7 +77,7 @@ python -m pytest
     - Objetivo: prever churn (`Churn`) com Pipeline do scikit-learn, sem vazamento de dados entre treino e teste.
     - `TotalCharges` vinha como texto; convertida com `pd.to_numeric(..., errors="coerce")`. Os 11 nulos tinham `tenure = 0` (cliente novo), então imputamos 0 por regra de negócio, não pela mediana.
     - Removi `customerID` das features: é identificador, não sinal preditivo.
-    - Churn geral ~[coloque a % do pie]. Por contrato, mês a mês tem a maior taxa; contratos anuais têm bem menos churn (ver gráfico no notebook; sempre com o `n` no rótulo).
+    - Churn geral ~26,5%. Por contrato, mês a mês tem a maior taxa; contratos anuais têm bem menos churn (ver gráfico no notebook; sempre com o `n` no rótulo).
     - Comparei Logistic Regression e Random Forest na mesma validação cruzada estratificada (AUC). LR ~0.848, RF ~0.827; fiquei com a logística.
-    - No teste, Brier antes da calibração: 0.1380. Depois do `CalibratedClassifierCV` (`sigmoid`): [cole o valor]. A curva de calibração [diga se ficou mais perto da diagonal ou quase igual].
+    - No teste, Brier antes da calibração: 0.1380. Depois do `CalibratedClassifierCV` (`sigmoid`): 0.1380. A curva de calibração ficou quase igual à curva de Logistic Regression.
     - O que quebra: categoria nova no OneHot (mitigado com `handle_unknown="ignore"`); desbalanceamento de classes (churn é minoria); usar o conjunto de teste mais de uma vez na escolha do modelo.
