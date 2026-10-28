@@ -20,6 +20,7 @@ Construir fluência em Python escrevendo o código eu mesmo e aplicar conceitos 
 | 03 | Pandas, nulos, taxas e séries | ✅ |
 | 04 | Seaborn, Matplotlib e visualizações de dados | ✅ |
 | 05 | Statsmodels, regressão linear e estatística | ✅ |
+| 06 | Telco churn: Pipeline, CV e calibração | ✅ |
 
 ## Como rodar
 ```
@@ -71,3 +72,12 @@ python -m pytest
     - Podemos avaliar que o modelo mais simples "mpg ~ horsepower + weight" não era o ideal devido aos resíduos ![Resíduos modelo 1](/reports/figs/mpg/residuos_modelo1.png). Eles apresentam heterocedasticidade (No gráfico de resíduos vs. previstos a nuvem de pontos tem formato de U e aumento da variação em forma de funil) além de apresentar assimetria à direita (Q-Q Plot com pontos acima da reta de 45°).
     - Já para o modelo "log(mpg) ~ horsepower + weight" tivemos o melhor modelo entre os testados, com resíduos sem heterocedasticidade aparente e assimetria menor à direita. ![Resíduos modelo 2](/reports/figs/mpg/residuos_modelo2.png).
     - Por último, testamos um modelo com a variável "weight" ao quadrado "mpg ~ horsepower + weight" mas essa transformação não foi capaz de capturar o comportamento não linear entre as variáveis, mantendo os mesmos problemas do modelo 1 ![Resíduos modelo 3](/reports/figs/mpg/residuos_modelo3.png).
+- Telco Customer Churn (classificação)
+    - Notebook: [Telco Customer Churn](notebooks/telco_churn.ipynb).
+    - Objetivo: prever churn (`Churn`) com Pipeline do scikit-learn, sem vazamento de dados entre treino e teste.
+    - `TotalCharges` vinha como texto; convertida com `pd.to_numeric(..., errors="coerce")`. Os 11 nulos tinham `tenure = 0` (cliente novo), então imputamos 0 por regra de negócio, não pela mediana.
+    - Removi `customerID` das features: é identificador, não sinal preditivo.
+    - Churn geral ~[coloque a % do pie]. Por contrato, mês a mês tem a maior taxa; contratos anuais têm bem menos churn (ver gráfico no notebook; sempre com o `n` no rótulo).
+    - Comparei Logistic Regression e Random Forest na mesma validação cruzada estratificada (AUC). LR ~0.848, RF ~0.827; fiquei com a logística.
+    - No teste, Brier antes da calibração: 0.1380. Depois do `CalibratedClassifierCV` (`sigmoid`): [cole o valor]. A curva de calibração [diga se ficou mais perto da diagonal ou quase igual].
+    - O que quebra: categoria nova no OneHot (mitigado com `handle_unknown="ignore"`); desbalanceamento de classes (churn é minoria); usar o conjunto de teste mais de uma vez na escolha do modelo.
