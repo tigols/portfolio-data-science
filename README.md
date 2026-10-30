@@ -86,6 +86,8 @@ python -m pytest
     - Script: [BCB Data Pipeline](src/bcb.py).
     - Test: [Tests BCB Data Pipeline](tests/test_bcb.py)
     - Utilizando a biblioteca `requests`, fiz a conexão com a API do Banco Central para coletar dados da série da PTAX em um período de minha preferência.
-    - Me atentei em tratar erros por timeout, falha de conexão e tipo de objeto.
+    - Me atentei em tratar erros por timeout, falha de conexão, tipo de objeto e HTTP 500.
     - Após receber os dados (JSON), utilizei pandas para transformar em dataframe, verificando se as colunas que deveriam existir estavam nos dados da API e transformando os tipos das colunas
     - Por fim, salvei os dados em um Banco de Dados PostgreSQL local, utilizando UPSERT para não duplicar os dados já existentes em uma segunda chamada e atualizar os que mudaram desde a ultima consulta.
+    - Em [Variação Absoluta Diária](sql/variacao_diaria.sql) podemos ver uma query simples para achar a variação diária usando LAG.
+    - 
