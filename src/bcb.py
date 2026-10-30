@@ -5,10 +5,15 @@
 ########################################################################
 
 import requests
+import os
+import psycopg
+import pandas as pd
 
 # Mapa Mental
 # 1) Passar a URL de endpoint
 # 2) Definir funcao de busca
+# 3) Normalizar para DataFrame
+# 4) Salvar no banco de dados
 
 URL = (
     "https://api.bcb.gov.br/dados/serie/bcdata.sgs.1/dados"
@@ -46,14 +51,13 @@ def buscar_serie(url: str, data_inicio: str = '01/01/2024', data_fim: str = '31/
 ##
 ########################################################################
 
-import pandas as pd
 
 def json_para_dataframe(serie: list) -> pd.DataFrame:
     """Recebe uma lista JSON e transforma em DataFrame"""
-    if not serie:
-        raise ValueError("Série está vazia")
     if not isinstance(serie, list):
         raise TypeError(f"A série deve ser uma lista, não {type(serie)}")
+    if not serie:
+        raise ValueError("Série está vazia")
 
     df = pd.DataFrame(serie)
 
@@ -69,9 +73,6 @@ def json_para_dataframe(serie: list) -> pd.DataFrame:
 ##              Criar tabela no Banco de Dados
 ##
 ########################################################################
-
-import os
-import psycopg
 
 
 # DDL = Data Definition Language
@@ -119,7 +120,7 @@ def salvar_postgres(df: pd.DataFrame) -> int:
 
 if __name__ == "__main__":
     serie = buscar_serie(URL, data_inicio='01/01/2024', data_fim='31/12/2024')
-    print(len(serie), serie[0]) # esta devolvendo corretamente 22 registros  sendo o primeiro dia 2 de janeiro de 2024
+    print(len(serie), serie[0]) 
     # note que JSON é uma lista de dicionarios
 
     df = json_para_dataframe(serie)
