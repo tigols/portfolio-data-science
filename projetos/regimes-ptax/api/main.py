@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, HTTPException
 import datetime as dt
 import joblib
 import statsmodels.api as sm
@@ -27,7 +27,11 @@ def buscar_regime(
         data_inicio = data_fim - dt.timedelta(days=60)
 
 
-    dados_ptax = buscar_serie(URL, data_fim=data_fim.strftime("%d/%m/%Y"), data_inicio=data_inicio.strftime("%d/%m/%Y"), timeout= 60)
+    try:
+        dados_ptax = buscar_serie(URL, data_fim = data_fim, data_inicio = data_inicio, timeout=60)
+    except (RuntimeError, ConnectionError):
+        raise HTTPException(status_code=503, detail="Fonte de dados do BCB indisponível") 
+    
     dados_ptax = json_para_dataframe(dados_ptax)
     retornos = dados_ptax['valor'].pct_change().dropna()*100
 
