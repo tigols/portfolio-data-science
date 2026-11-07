@@ -48,7 +48,7 @@ def buscar_regime(
     prob_estresse = res.filtered_marginal_probabilities.iloc[-1, modelo["estresse"]]
 
     return {
-            "data": data_fim.isoformat(),
+            "data": retornos.index[-1].strftime("%Y-%m-%d"),
             "prob_estresse": round(float(prob_estresse), 4),
             "regime": "estresse" if prob_estresse > 0.5 else "normal",
         }
