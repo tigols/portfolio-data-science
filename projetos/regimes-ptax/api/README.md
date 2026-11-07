@@ -9,9 +9,9 @@
    `uvicorn main:app --reload`
 4. Teste pelo navegador em `http://127.0.0.1:8000/docs` (Swagger) ou pelo terminal:
    `curl http://127.0.0.1:8000/health`
-   `curl "http://127.0.0.1:8000/regime?data_inicio=2026-09-01&data_fim=2026-11-06"`
+   `curl "http://127.0.0.1:8000/regime?data_fim=2026-11-07"`
 
-Exemplo de resposta do `/regime`:
-`{ "data": "2026-11-07", "prob_estresse": 0.6168, "regime": "estresse"}`
+    Exemplo de resposta do `/regime`:
+    `{ "data": "2026-11-06", "prob_estresse": 0.6168, "regime": "estresse"}`
 5. Rode os testes (não dependem do BCB):
    `pytest -v`
