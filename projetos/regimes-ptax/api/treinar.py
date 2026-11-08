@@ -1,10 +1,15 @@
+from pathlib import Path
+import sys
+PASTA_API = Path(__file__).resolve().parent
+RAIZ_REPO = PASTA_API.parents[2]
+sys.path.append(str(RAIZ_REPO))
+
+
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 import joblib
-import sys
 
-sys.path.append("../../..")
 
 from src.bcb import buscar_serie, json_para_dataframe, URL
 
@@ -29,5 +34,5 @@ final_model = {
     "params": model_ptax_fit.params
 }
 
-joblib.dump(final_model, 'model_ptax.pkl')
+joblib.dump(final_model, PASTA_API / 'model_ptax.pkl')
 

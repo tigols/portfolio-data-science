@@ -1,14 +1,21 @@
+from pathlib import Path
+import sys
+PASTA_API = Path(__file__).resolve().parent
+RAIZ_REPO = PASTA_API.parents[2]
+sys.path.append(str(RAIZ_REPO))
+
+
 from fastapi import FastAPI, Query, HTTPException
 import datetime as dt
 import joblib
 import statsmodels.api as sm
-import sys
-sys.path.append("../../..")
 from src.bcb import buscar_serie, json_para_dataframe, URL
+
+
 
 app = FastAPI()
 
-modelo = joblib.load('model_ptax.pkl')
+modelo = joblib.load(PASTA_API / 'model_ptax.pkl')
 
 
 @app.get("/health")
